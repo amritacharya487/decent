@@ -5,14 +5,15 @@ import { Link } from 'react-router-dom';
 const RegisterForm = () => {
  const [username, setUsername] = useState('');
  const [password, setPassword] = useState('');
- const [confirmPassword, setConfirmPassword] = useState('');
+ const [confirmPassword, setconfirmPassword] = useState('');
  const [userType, setUserType] = useState('User');
 
- const handleRegister = async () => {
+ /*const handleRegister = async () => {
     if (password !== confirmPassword) {
       alert('Passwords do not match');
       return;
-    }
+    }*/
+
 
      /* try {
       await ({ username, password, userType });
@@ -23,12 +24,15 @@ const RegisterForm = () => {
     } catch (error) {
       alert('Error registering user: ' + error.message);
     } */
- };
+ 
+ 
+    
 
  return (
+  
     <div className='form-container'>
       <h2>Register</h2>
-      <form>
+      <form  >
       <label htmlFor="email">User Name</label>
         <input
           type="email"
@@ -53,7 +57,7 @@ const RegisterForm = () => {
             type="password"
             value={confirmPassword}
             placeholder='Confirm Password' required
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            onChange={(e) => setconfirmPassword(e.target.value)}
           />
       
       
@@ -63,12 +67,13 @@ const RegisterForm = () => {
             value={userType}
             onChange={(e) => setUserType(e.target.value)}
           >
-            <option value="User">User</option>
-            <option value="Admin">Admin</option>
+            <option value="Professionals">Professionals</option>
+            <option value="Management">Management</option>
           </select>
         </label>
         
-        <button type="button" onClick={handleRegister}>
+        <button type="button" 
+        >
           Register
         </button>
         <div class="top">  
@@ -77,6 +82,6 @@ const RegisterForm = () => {
       </form>
     </div>
  );
-};
+ };
 
 export default RegisterForm;
