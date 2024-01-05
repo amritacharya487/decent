@@ -1,0 +1,78 @@
+.login-container {
+  width: 450px;
+  height: 500px;
+  padding: 16px;
+  margin: 0 auto;
+  top: 0 ;
+  background: linear-gradient(rgba(39,39,39, 0.6), transparent);
+  border: 1px solid #ccc;
+  align-items: center;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+ }
+ 
+ .login-container h1 {
+  text-align: center;
+  font: 500;
+  margin-bottom: 24px;
+ }
+ 
+ .login-container label {
+  display: block;
+  margin-bottom: 10px;
+ }
+ 
+ .login-container input {
+  width: 70%;
+  padding: 20px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  box-sizing: border-box;
+  align-content: center;
+ }
+ 
+ .login-container select {
+  width: 60%;
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  justify-content: center;
+ }
+ 
+ .login-container button {
+  width: 50%;
+  padding: 16px;
+  margin-top: 16px;
+  align-items: center;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 30px;;
+  cursor: pointer;
+ }
+ 
+ .login-container button:hover {
+  background-color: #0056b3;
+ }
+ .two-col{
+  display: flex;
+  justify-content: right;
+  color: #be6d6d;
+  font-size: small;
+  margin-top: 15px;
+}
+.two-col .one{
+  display: flex;
+  gap: 5px;
+}
+.two-col label a{
+  text-decoration: none;
+  color: #a72020;
+}
+.two label a:hover{
+  text-decoration: underline;
+}
