@@ -1,0 +1,12 @@
+.TablePageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%s;
+    height: 50vh; /* You can adjust the height as needed */
+  }
+  
+  .TablePage {
+    width: 600px;
+    margin-bottom: 20px;
+  }

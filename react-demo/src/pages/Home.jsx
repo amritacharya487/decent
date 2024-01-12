@@ -6,13 +6,18 @@ import Register from '../components/Register';
 
 
 
+
+
+
 const Home = () => {
   return (
     <div>
       <div>
+       
       <Login/>
         <Routes>
         <Route path='/Register' element={<Register />} />
+        
         </Routes>
       
       </div>

@@ -3,6 +3,7 @@
   background: linear-gradient(rgba(79, 134, 170, 0.6), transparent);
   height: 100vh;
   width: 100%;
+  overflow: scroll;
 }
 
 .App-logo {

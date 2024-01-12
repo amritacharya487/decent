@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
-const Login = ()=> {
-      const data ={ username:"", password:""};
 
+
+const Login = ()=> {
+      const data ={ username:" ", password:" "};
+      
       const [inputData , setInputData] =useState(data);
-      const [error, setError] = useState(null);
+      const [error ,setError] = useState(null);
 
       
       /*const handleData = (e) => {
@@ -23,32 +25,38 @@ const Login = ()=> {
       }));
     };
 
-    const handlesubmit = async (e) => {
-      e.preventDefault();
-
-      try {
-          const response = await axios.post('https://localhost:7042/api/Authentication/login', inputData);
-
-          if (response.data) {
-              console.log('Login successful');
-              // Handle successful login (e.g., redirect to dashboard)
-          }
-      } catch (error) {
-          console.error('Error during login', error);
-          setError('Invalid username or password. Please try again.');
-      }
-  };
+    
+     
+  
 
     
       
   //const [password, setPassword] = useState('');
   //const [userType, setUserType] = useState('User'); // Default to 'User'
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-  //const handleLogin = () => {
+    // Perform login logic here
+    try {
+      const response = await axios.post('https://localhost:7042/api/Authentication/login', inputData);
+
+      if (response.data) {
+          console.log('Login successful');
+          // Handle successful login (e.g., redirect to dashboard)
+      }
+      } catch (error) {
+      console.error('Error during login', error);
+      setError('Invalid username or password. Please try again.');
+      }
+    // Redirect to the home page after successful login
+    
+  };
+  /* const handleLogin = () => {
     // Perform authentication logic here
     // For simplicity, let's assume a successful login for any input
-    //onLogin({ username });
-  //};
+
+    onLogin({ username });
+  }; */
   
   
  return (
@@ -78,7 +86,7 @@ const Login = ()=> {
         />
 
        
-        <button type="button" onClick={handlesubmit}>Login</button>
+        <button onClick={handleLogin}><Link to="/Dashboard" >Login</Link></button>
         <div class="two-col">
                     <div class="one">
                         <label><a href="*">Forgot password?</a></label>
