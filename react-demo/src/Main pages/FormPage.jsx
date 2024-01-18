@@ -14,34 +14,44 @@ const FormPage = ({ addDetails }) => {
   const [contact, setContact] = useState('');
   const [address, setAddress] = useState('');
 
-  const handleclick = (e) => {
+  const handleclick =async(e) => {
     e.preventDefault();
 
-    const response =  axios.post('https://localhost:7042/api/Patients/store', { symptoms: symptoms.filter(symptom => symptom.trim() !== '') });
-
-
-    const details = {
-      firstName,
-      lastName,
-      age,
-      gender,
-      contact,
-      address,
-      predictedDisease,
-    };
-
-    // Pass the details to the parent component
-    addDetails(details);
-
-    // Reset the form
-    setFirstName('');
-    setLastName('');
-    setAge('');
-    setGender('');
-    setContact('');
-    setAddress('');
-    setPredictedDisease('');
-  };
+    try {
+      // Make a POST request to store patient details
+      const storeResponse = await axios.post('https://localhost:7042/api/Patients/store', {
+        firstName,
+        lastName,
+        age,
+        gender,
+        contact,
+        address,
+        predictedDisease,  // Make sure to include the predictedDisease in the request payload
+        symptoms: symptoms.filter(symptom => symptom.trim() !== ''),
+      });
+  
+      if (storeResponse.status === 200) {
+        console.log('Patient details stored successfully:', storeResponse.data);
+        // Assuming you want to do something with the response, you can handle it here
+      } else {
+        console.error('Failed to store patient details');
+        // Handle the failure case
+      }
+  
+      // Reset the form
+      setFirstName('');
+      setLastName('');
+      setAge('');
+      setGender('');
+      setContact('');
+      setAddress('');
+      setSymptoms(Array(5).fill(''));
+      setPredictedDisease('');
+  }
+  catch (error) {
+    console.error('Error:', error);
+  }
+};
   const [symptoms, setSymptoms] = useState(Array(5).fill(''));
   const [predictedDisease, setPredictedDisease] = useState('');
 
