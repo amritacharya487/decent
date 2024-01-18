@@ -36,6 +36,7 @@ const TablePage = ({ details, onEdit, onUpdate, onDelete }) => {
               <th>Gender</th>
               <th>Contact</th>
               <th>Address</th>
+              <th>Predicted Disease</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -48,6 +49,7 @@ const TablePage = ({ details, onEdit, onUpdate, onDelete }) => {
                 <td>{detail.gender}</td>
                 <td>{detail.contact}</td>
                 <td>{detail.address}</td>
+                <td>{detail.PredictedDisease}</td>
                 <td>
                   <button onClick={() => handleEdit(index)}>Edit</button>
                   <button onClick={() => handleUpdate()}>Update</button>

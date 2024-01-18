@@ -14,6 +14,7 @@ import Dashboard from './components/Dashboard';
 
 
 
+
 const App =() => {
   
   return (
@@ -28,6 +29,7 @@ const App =() => {
           <Route path='/login' element={<Login/>} />
           <Route path='/Register' element={<Register/>} />
           <Route path='/Dashboard' element={<Dashboard/>} />
+          
           
         </Routes>
        {/* Your other components go here */}

@@ -1,56 +1,56 @@
-.Ho {
-    width: 700px; /* Adjust the maximum width as needed */
-    margin: 0 auto;   /* Center the form horizontally */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    top: 50px;
-  }
-  
-  .Ho h2 {
-    text-align: center;
-  }
-  .Ho label div{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-  }
-  
-  .Ho form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .Ho label {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-  }
-  
-  .Ho input {
-    width:  300px;
-    border-radius: 30px;
-    padding: 10px;
-    margin-top: 4px;
-    box-sizing: border-box;
-    
-  }
-  
-  .Ho button {
-    background-color: #4caf50;
-    color: #fff;
-    padding: 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    width: 50%;
-  }
-  
-  .Ho button:hover {
-    background-color: #45a049;
-  }
-  
+.CombinedForm {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.CombinedForm label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.CombinedForm input,
+.CombinedForm select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+.CombinedForm button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.CombinedForm button:hover {
+  background-color: #45a049;
+}
+
+/* Additional styling for Disease Prediction Form */
+.CombinedForm h2 {
+  margin-bottom: 20px;
+}
+
+.CombinedForm select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+.CombinedForm p {
+  margin-top: 10px;
+}

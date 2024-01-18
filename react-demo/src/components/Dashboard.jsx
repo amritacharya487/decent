@@ -1,7 +1,7 @@
 // App.js
 import React, { useState } from 'react';
 import TablePage from '../Main pages/TablePage';
-import FormPage from '../Main pages/FormPage';
+import FormPage from '../Main pages/FormPage.jsx';
 
 
 const Dashboard = () => {
@@ -14,7 +14,8 @@ const Dashboard = () => {
 
   return (
     <div>
-      <FormPage addDetails={addDetails} />
+    < FormPage addDetails={addDetails} />
+      
       <TablePage details={details} />
     </div>
    
