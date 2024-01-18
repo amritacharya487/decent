@@ -17,6 +17,9 @@ const FormPage = ({ addDetails }) => {
   const handleclick = (e) => {
     e.preventDefault();
 
+    const response =  axios.post('https://localhost:7042/api/Patients/store', { symptoms: symptoms.filter(symptom => symptom.trim() !== '') });
+
+
     const details = {
       firstName,
       lastName,
@@ -39,7 +42,7 @@ const FormPage = ({ addDetails }) => {
     setAddress('');
     setPredictedDisease('');
   };
-  const [symptoms, setSymptoms] = useState(['None', 'None', 'None', 'None', 'None']);
+  const [symptoms, setSymptoms] = useState(Array(5).fill(''));
   const [predictedDisease, setPredictedDisease] = useState('');
 
   // Define l1 as an array of symptoms
@@ -62,21 +65,34 @@ const FormPage = ({ addDetails }) => {
   'fluid_overload','blood_in_sputum','prominent_veins_on_calf','palpitations','painful_walking','pus_filled_pimples','blackheads','scurring','skin_peeling',
   'silver_like_dusting','small_dents_in_nails','inflammatory_nails','blister','red_sore_around_nose','yellow_crust_ooze'];
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:5000/api/diseaseprediction', symptoms);
-      setPredictedDisease(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const handleChange = (index, event) => {
     const newSymptoms = [...symptoms];
     newSymptoms[index] = event.target.value;
     setSymptoms(newSymptoms);
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post('https://localhost:7042/api/Disease/disease', { symptoms: symptoms.filter(symptom => symptom.trim() !== '') });
+      
+      if (response.status === 200) {
+        const result = response.data;
+        console.log('Result:', result);
+
+        setPredictedDisease(result); // Adjust this based on the actual response structure
+      } else {
+        console.error('Failed to predict disease');
+        setPredictedDisease('');
+      }
+      
+      //setPredictedDisease(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  
 
 
   return (
@@ -130,11 +146,11 @@ const FormPage = ({ addDetails }) => {
             </select>
           </label>
         ))}
-        <button type="submit">Predict Disease</button>
+        <button onClick={handleSubmit} type="submit">Predict Disease</button>
         { }
       </form>
     </div>
-    <label>Predicted Disease:<input type='text' value= {predictedDisease &&{predictedDisease} } /></label>
+    <label>Predicted Disease:<input type='text' value={predictedDisease} readOnly /></label>
       <br/>
         <button type="submit">Add Details</button>
       </form>
