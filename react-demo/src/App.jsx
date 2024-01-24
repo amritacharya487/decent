@@ -10,6 +10,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
+import UserProfile from './pages/profile';
+import FormPage from './Main pages/FormPage';
 
 
 
@@ -28,16 +30,17 @@ const App =() => {
           <Route  path='/Contact' element={<Contact/>}/>  
           <Route path='/Login' element={<Login/>} />
           <Route path='/Register' element={<Register/>} />
-          <Route path='/Dashboard' element={<Dashboard/>} />
-          
+          <Route path='/Dashboard' exact element={<Dashboard/>} />
+          <Route path="/form" element={FormPage} />
+          <Route path='/Dashboard/profile/:username' element={<UserProfile/>} />
           
         </Routes>
        {/* Your other components go here */}
        
-       <Footer />
+       
       
       </>
-     
+      <Footer />
     </div>
   );
 }

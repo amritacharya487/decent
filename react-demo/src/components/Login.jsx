@@ -56,6 +56,8 @@ const handlesubmit = async (e) => {
   
  return (
   <div className='row'>
+    <div>
+    </div>
  {/*<Navbar isAuthenticated={isAuthenticated} />*/}
     <div className="login-container">
    
@@ -94,6 +96,7 @@ const handlesubmit = async (e) => {
                 </div>
       </form>
     </div>
+    
     </div>
  );
 };

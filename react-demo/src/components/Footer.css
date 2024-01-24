@@ -1,5 +1,7 @@
 .footer {
     background-color: #f8f9fa;
-    padding: 20px;
-    text-align: center;
+    justify-items: auto;
+    margin-top: auto; /* Push the footer to the bottom */
+    align-items: end;
+    padding: 10px; /* Add your preferred padding */
 }

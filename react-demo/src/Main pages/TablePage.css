@@ -1,12 +1,34 @@
+/* TablePage.css */
+
 .TablePageContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 70%s;
-    height: 50vh; /* You can adjust the height as needed */
-  }
-  
-  .TablePage {
-    width: 600px;
-    margin-bottom: 20px;
-  }
+  padding: 30px;
+}
+
+.TablePage {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.TablePage table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.TablePage th, .TablePage td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.TablePage th {
+  background-color: #f2f2f2;
+}
+
+.TablePage button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* Add more styles as needed */

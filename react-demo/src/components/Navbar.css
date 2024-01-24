@@ -47,6 +47,12 @@ nav {
     color: white;
     position: sticky;
     top: 0;
+    height: 100px;
+}
+nav .logo{
+    position: absolute;
+    size: 60px;
+    background: url(https://images.app.goo.gl/DtF5UXsnH3eHbHhv6) transparent;
 }
 
 nav .title {
