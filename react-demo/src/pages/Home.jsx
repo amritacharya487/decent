@@ -11,10 +11,8 @@ import Register from '../components/Register';
 
 const Home = () => {
   return (
-    <div>
-      <div className='maindiv'>
+          <div className='maindiv'>
 
-      </div>
       <div>
       <Login/>
         <Routes>
@@ -23,6 +21,7 @@ const Home = () => {
         </Routes>
       
       </div>
+      
       
     </div>
   )

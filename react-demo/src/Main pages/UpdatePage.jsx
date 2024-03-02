@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
-import './FormPage.css'; // Import CSS file for styling
+import React, { useState,useEffect } from 'react';
+import './UpdatePage.css'; // Import CSS file for styling
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const Form = () => {
+  const { id } = useParams(); // Get the patient ID from URL parameters
+
+  //const[id, setId] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [age, setAge] = useState('');
@@ -12,15 +16,37 @@ const Form = () => {
   const [address, setAddress] = useState('');
   const navigate= useNavigate();
 
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`https://localhost:7042/api/Patients/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const userData = response.data;
+        setFirstName(userData.firstName);
+        setLastName(userData.lastName);
+        setAge(userData.age);
+        setGender(userData.gender);
+        setAddress(userData.address);
+        setContact(userData.contact);
+      } catch (error) {
+        console.error('Error fetching profile data:', error);
+      }
+    };
+  
+    fetchProfileData();
+  }, [id]);
   
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userId= localStorage.getItem('userId')
-  
-      // Make a POST request to store patient details
-      const storeResponse = await axios.post('https://localhost:7042/api/Patients/store', {
+      const userId = localStorage.getItem('userId');
+      const response = await axios.put(`https://localhost:7042/api/Patients/update/${id}`, {
         firstName,
         lastName,
         age,
@@ -29,30 +55,24 @@ const Form = () => {
         address,
         predictedDisease,
         symptoms: symptoms.filter(symptom => symptom.trim() !== ''),
-        userId, // Include the user ID extracted from the token in the request payload
+        userId,
       });
-        if (storeResponse.status === 200) {
-          console.log('Patient details stored successfully:', storeResponse.data);
-          navigate('/Dashboard');
-          // Assuming you want to do something with the response, you can handle it here
-        } else {
-          console.error('Failed to store patient details');
-          // Handle the failure case
-        }
-    
-        // Reset the form
-        
-        setFirstName('');
-        setLastName('');
-        setAge('');
-        setGender('');
-        setContact('');
-        setAddress('');
-        setSymptoms(Array(5).fill(''));
-        setPredictedDisease('');
-    }
-    catch (error) {
-      console.error('Error:', error);
+      if (response.status === 200) {
+        console.log('Patient details updated successfully:', response.data);
+        navigate('/Dashboard');
+      } else {
+        console.error('Failed to update patient details');
+      }
+      setFirstName('');
+      setLastName('');
+      setAge('');
+      setGender('');
+      setContact('');
+      setAddress('');
+      setSymptoms(Array(5).fill(''));
+      setPredictedDisease('');
+    } catch (error) {
+      console.error('Error updating patient details:', error);
     }
   };
 
@@ -131,13 +151,9 @@ const Form = () => {
         </div>
         <div className="gender">
           <label htmlFor="gender">Gender</label>
-          <select id="gender" name="gender" value={gender} required onChange={(e) => setGender(e.target.value)}>
-            <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
+          <input type='text' id="gender" name="gender" value={gender} required onChange={(e) => setGender(e.target.value)}>
+            </input>
+                </div>
         </div>
         <div className='contact'>
         <div className="address">

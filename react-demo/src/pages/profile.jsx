@@ -1,102 +1,74 @@
-// UserProfile.js
-
 import React, { useState, useEffect } from 'react';
-
-import { logout } from '../services/authaction';  // Import your logout action
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-const UserProfile = ({ userId, user, logout }) => {
-  const [updatedUser, setUpdatedUser] = useState({ ...user });
+import './profile.css';
+
+const UserProfile = () => {
+  const [name, setName] = useState('');
+  const [gender, setGender] = useState('');
+  const [address, setAddress] = useState('');
+  const [contact, setContact] = useState('');
+  const [description, setDescription] = useState('');
+  const [userId, setuserId]= useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    // Fetch user data from the backend using userId
-    const fetchUserData = async () => {
+    // Fetch user profile data from the backend
+    const fetchProfileData = async () => {
       try {
-        const response = await axios.get(`/api/users/${userId}`);
-        setUpdatedUser(response.data);
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`https://localhost:7042/api/User/GetLoggedInProfessionalDetails`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Assuming you are using JWT and passing the token in the Authorization header
+          },
+        });
+        const userData = response.data;
+        setName(userData.name);
+        setGender(userData.gender);
+        setAddress(userData.address);
+        setContact(userData.contact);
+        setDescription(userData.description);
+        setuserId(userData.userId);
       } catch (error) {
-        console.error('Error fetching user data', error);
+        console.error('Error fetching profile data:', error);
+        setError('An error occurred while fetching profile data. Please try again later.');
       }
     };
 
-    fetchUserData();
-  }, [userId]);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUpdatedUser((prevUser) => ({
-      ...prevUser,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      // Send updated user data to the backend
-      await axios.put(`/api/users/${user.id}`, updatedUser);
-      // Optionally, you can fetch updated user data again
-      // to ensure consistency with the backend
-    } catch (error) {
-      console.error('Error updating user profile', error);
-    }
-  };
-
-  const handleLogout = () => {
-    // Dispatch the logout action
-    logout();
-    // Optionally, you can redirect the user to the login page
-    // history.push('/login');
-  };
+    fetchProfileData();
+  }, []); // Empty dependency array ensures this effect runs only once on component mount
 
   return (
-    <div>
-      {user ? (
-        <>
-          <h2>{user.name}'s Profile</h2>
-          <p>Email: {user.email}</p>
-          <p>Username: {user.username}</p>
-          {/* Additional user profile information */}
-          {/* Render a form to update user profile */}
-          <form onSubmit={handleSubmit}>
-            <h3>Edit Profile</h3>
-            <label>
-              Name:
-              <input
-                type="text"
-                name="name"
-                value={updatedUser.name}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Email:
-              <input
-                type="email"
-                name="email"
-                value={updatedUser.email}
-                onChange={handleInputChange}
-              />
-            </label>
-            {/* Add more fields as needed */}
-            <button type="submit">Update Profile</button>
-          </form>
-          <button onClick={handleLogout}>Logout</button>
-        </>
-      ) : (
-        <p>Loading user profile...</p>
-      )}
+    <div className="container">
+      <h2>User Profile</h2>
+      <form>
+        <label>
+          Name:
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+        </label>
+        <label>
+          Gender:
+          <input type="text" value={gender} onChange={(e) => setGender(e.target.value)} />
+        </label>
+        <label>
+          Address:
+          <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
+        </label>
+        <label>
+          Contact:
+          <input type="text" value={contact} onChange={(e) => setContact(e.target.value)} />
+        </label>
+        <label>
+          Description:
+          <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+        </label>
+        {error && <p className="error">{error}</p>}
+        {/*<button type="submit">Update Profile</button>*/}
+        <Link to='/Dashboard/update'  className='ac' >Update Profile</Link> 
+      </form>
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
-  user: state.auth.user,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  logout: () => dispatch(logout()),
-});
-
-export default (mapStateToProps, mapDispatchToProps)(UserProfile);
+export default UserProfile;

@@ -1,16 +1,17 @@
 .form-container {
+  font-family: sans-serif;
   width: 450px;
   height: 500px;
   padding: 16px;
-  margin: 0 auto;
+  margin: 20px auto;
   top: 0 ;
-  background: linear-gradient(rgba(39,39,39, 0.6), transparent);
+  background: whitesmoke;
   border: 1px solid #ccc;
-  align-items: center;
+  align-items: right;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
  }
- .form-container h2 {
+ .form-container h1 {
   text-align: center;
   font: 500;
   margin-bottom: 24px;
@@ -22,11 +23,11 @@
  }
  
  .form-container input {
-  width: 70%;
+  width: 80%;
   padding: 20px;
   margin-bottom: 16px;
   border: 1px solid #ccc;
-  border-radius: 30px;
+  border-radius: 10px;
   box-sizing: border-box;
   align-content: center;
  }
@@ -41,19 +42,36 @@
   box-sizing: border-box;
   justify-content: center;
  }
- 
+ .form-container .box{
+  align-items: center;
+  margin-left: 100px;
+  
+ }
  .form-container button[type="button"] {
-  width: 50%;
+  width: 80%;
   padding: 16px;
   margin-top: 16px;
+  font-size: 20px;
   align-items: center;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 30px;;
+  border-radius: 10px;;
   cursor: pointer;
  }
  
  .form-container button[type="button"]:hover {
   background-color: darkblue;
+ }
+ .form-container .top{
+  display: flex;
+  justify-content: left;
+  color: #be6d6d;
+  font-size: small;
+  margin-top: 25px;
+ }
+ .form-container .top .ac{
+  text-decoration: none;
+  color: darkblue;
+  font-size: 18px;
  }

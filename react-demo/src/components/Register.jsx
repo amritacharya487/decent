@@ -4,31 +4,12 @@ import { Link } from 'react-router-dom';
 import signup from '../services/authservice';
 
 
-
- /*const handleRegister = async () => {
-    if (password !== confirmPassword) {
-      alert('Passwords do not match');
-      return;
-    }*/
-
-
-     /* try {
-      await ({ username, password, userType });
-      alert('Registration successful');
-      setUsername('');
-      setPassword('');
-      setConfirmPassword('');
-    } catch (error) {
-      alert('Error registering user: ' + error.message);
-    } */
- 
-
     const RegisterForm = () => {
       const [user, setUser] = useState({
           email: '',
           password: '',
           confirmPassword: '',
-          role:'',
+          role:'Professionals',
           
           
       });
@@ -101,30 +82,25 @@ const handleSignup = async (e) => {
   }
 };
 
-
-
-     
-       
- 
-    
-
  return (
-  
-    <div className='form-container'>
-      <h2>Register</h2>
+  <div className='row'>
+    <div className="form-container">
+      <h1>Register</h1>
+      
       <form onSubmit={handleSignup} >
+      <div className='box'>
       <label htmlFor="email">Email</label>
         <input
           type="email"
           name='email'
           id="email"
           value={user.email}
-          placeholder=' Enter Username' required
+          placeholder=' Enter Email' required
           onChange={handleInputChange}
           
         />
 
-        <label htmlFor="password">Password:</label>
+        <label htmlFor="password">Password</label>
         <input
         name='password'
           type="password"
@@ -134,7 +110,7 @@ const handleSignup = async (e) => {
           onChange={handleInputChange}
         />
       
-        <label htmlFor="Confirm Password"> Confirm Password :</label>
+        <label htmlFor="Confirm Password"> Confirm Password</label>
           
           <input
           name='confirmPassword'
@@ -143,26 +119,19 @@ const handleSignup = async (e) => {
             placeholder='Confirm Password' required
             onChange={handleInputChange}
           />
+
+                
       
-      
-        <label>
-          User Type:
-          <select
-            
-            onChange={handleInputChange}
-          >
-            <option value={user.role}>Professionals</option>
-            <option value={user.role}>Management</option>
-          </select>
-        </label>
-        
+         
         <button type="button" onClick={handleSignup}>
           Register
         </button>
         <div class="top">  
                 Already Register <Link to='/'  className='ac' >Login</Link> 
                 </div>
+                </div>
       </form>
+    </div>
     </div>
  );
 };

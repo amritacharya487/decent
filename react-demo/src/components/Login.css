@@ -2,16 +2,16 @@
   width: 450px;
   height: 500px;
   padding: 16px;
-  margin: 0 auto;
-  top: 0 ;
-  background: linear-gradient(rgba(39,39,39, 0.6), transparent);
+  margin: 10px auto;
+  background: whitesmoke;
   border: 1px solid #ccc;
-  align-items: center;
+  align-items: right;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: sans-serif;
   
- }
- 
+}
+
  .login-container h1 {
   text-align: center;
   font: 500;
@@ -24,11 +24,11 @@
  }
  
  .login-container input {
-  width: 70%;
+  width: 80%;
   padding: 20px;
   margin-bottom: 16px;
   border: 1px solid #ccc;
-  border-radius: 30px;
+  border-radius: 10px;
   box-sizing: border-box;
   align-content: center;
  }
@@ -43,32 +43,51 @@
   justify-content: center;
  }
  
+ 
  .login-container button {
-  width: 50%;
+  
   padding: 16px;
   margin-top: 16px;
-  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
   background-color: #007bff;
   color: white;
-  border: none;
-  border-radius: 30px;;
+  border-radius: 10px;;
   cursor: pointer;
   text-decoration: none;
  }
+ .login-container .button{
+  display: flex;
+  justify-content: space-between;
+ }
+ .login-container .box  {
+  font-size: 18px;
+ }
+ .login-container .ac{
+  text-decoration: none;
+  color: darkblue;
+  font-size: 18px;
+ }
+ .login-container .login{
+  width: 60%;
+ }
+ .login-container .button {
+justify-content: space-between;  
+ }
  
  .login-container button:hover {
-  background-color: #0056b3;
+  background-color: darkblue;
  }
  .two-col{
   display: flex;
-  justify-content: right;
+  justify-content: left;
   color: #be6d6d;
   font-size: small;
-  margin-top: 15px;
+  margin-top: 25px;
 }
-.two-col .one{
+.two-col{
   display: flex;
-  gap: 5px;
+  
 }
 .two-col label a{
   text-decoration: none;

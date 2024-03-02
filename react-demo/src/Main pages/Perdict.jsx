@@ -1,64 +1,11 @@
-import React, { useState } from 'react';
-import './FormPage.css'; // Import CSS file for styling
+import React from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
-const Form = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [age, setAge] = useState('');
-  const [gender, setGender] = useState('');
-  const [contact, setContact] = useState('');
-  const [address, setAddress] = useState('');
-  const navigate= useNavigate();
-
-  
-
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    try {
-      const userId= localStorage.getItem('userId')
-  
-      // Make a POST request to store patient details
-      const storeResponse = await axios.post('https://localhost:7042/api/Patients/store', {
-        firstName,
-        lastName,
-        age,
-        gender,
-        contact,
-        address,
-        predictedDisease,
-        symptoms: symptoms.filter(symptom => symptom.trim() !== ''),
-        userId, // Include the user ID extracted from the token in the request payload
-      });
-        if (storeResponse.status === 200) {
-          console.log('Patient details stored successfully:', storeResponse.data);
-          navigate('/Dashboard');
-          // Assuming you want to do something with the response, you can handle it here
-        } else {
-          console.error('Failed to store patient details');
-          // Handle the failure case
-        }
-    
-        // Reset the form
-        
-        setFirstName('');
-        setLastName('');
-        setAge('');
-        setGender('');
-        setContact('');
-        setAddress('');
-        setSymptoms(Array(5).fill(''));
-        setPredictedDisease('');
-    }
-    catch (error) {
-      console.error('Error:', error);
-    }
-  };
+export const Perdict = () => {
 
 
-
-  const [symptoms, setSymptoms] = useState(Array(5).fill(''));
+    const [symptoms, setSymptoms] = useState(Array(5).fill(''));
   const [predictedDisease, setPredictedDisease] = useState('');
 
   // Define l1 as an array of symptoms
@@ -108,52 +55,11 @@ const Form = () => {
     }
   };
 
-
-
   return (
-    <div className="form-container">
-      <h2>Enter Your Information</h2>
-      <form onSubmit={handleSubmit}>
-        <div className='name'>
-        <div className="firstName">
-          <label htmlFor="firstName">First Name</label>
-          <input type="text" id="firstName" name="firstName" required value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-        </div>
-        <div className="lastName">
-          <label htmlFor="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" required value={lastName} onChange={(e) => setLastName(e.target.value)} />
-        </div>
-        </div>
-        <div className='details'>
-        <div className="age">
-          <label >Age</label>
-          <input  type='text' value={age} onChange={(e) => setAge(e.target.value)} />
-        </div>
-        <div className="gender">
-          <label htmlFor="gender">Gender</label>
-          <select id="gender" name="gender" value={gender} required onChange={(e) => setGender(e.target.value)}>
-            <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-        </div>
-        <div className='contact'>
-        <div className="address">
-          <label htmlFor="address">Address</label>
-          <input type='text' name="address" value={address} required onChange={(e) => setAddress(e.target.value)}/>
-        </div>
-        <div className="number">
-          <label htmlFor="contact">Contact</label>
-          <input type="text" id="contact" name="contact" value={contact} required  onChange={(e) => setContact(e.target.value)} />
-        </div>
-        </div>
-        
-        <br />
-        <div className="CombinedForm">
-        <h2>Disease Prediction Form</h2>  
-        <form onSubmit={handleSubmit}>
+    <div className='predict_form'>
+    <div className="CombinedForm">
+        <h2>Disease Prediction</h2>  
+        <form>
         {Array.from({ length: 5 }).map((_, index) => (
           <label key={index}>
             {`Symptom ${index + 1}: `}
@@ -172,13 +78,8 @@ const Form = () => {
       </form>
     </div>
     <label>Predicted Disease:<input type='text' value={predictedDisease} /></label>
-      <br/>
-
-
-        <button type="submit">Add Details</button>
-      </form>
     </div>
-  );
-};
 
-export default Form;
+
+  )
+}

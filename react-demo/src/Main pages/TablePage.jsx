@@ -1,66 +1,54 @@
 // Import React and useState
-import React, { useState } from 'react';
+import React, { useState,useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import "./TablePage.css";
-import FormPage from './FormPage';
+import axios from 'axios';
 
 
 // Define the TablePage component
-const TablePage = ({ onUpdate, onDelete }) => {
+const TablePage = () => {
   // Initialize the state for details and editedIndex
-  const [details, setDetails] = useState([
-    {
-      firstName: 'John',
-      lastName: 'Doe',
-      age: 25,
-      gender: 'Male',
-      contact: '123-456-7890',
-      address: '123 Main St',
-      PredictedDisease: 'Common Cold',
-    },
-    {
-      firstName: 'Jane',
-      lastName: 'Doe',
-      age: 30,
-      gender: 'Female',
-      contact: '987-654-3210',
-      address: '456 Oak St',
-      PredictedDisease: 'Influenza',
-    },
-    // Add more dummy details as needed
-  ]);
+  const [details, setDetails] = useState([]);
 
-  const [editedIndex, setEditedIndex] = useState(null);
+const token= localStorage.getItem('token');
+const config={
+  headers:{
+    Authorization:`${token}`,
+    //UserId: `${userId}`,
+  }
+}
 
- 
+useEffect(() => {
+  const token = localStorage.getItem('token');
+      
+  if (!token) {
+    console.error('User ID not found in local storage.');
+    return;
+  }
+  // Fetch the list of patients for the logged-in user when the component mounts
+  const fetchPatients = async () => {
+    try {
+     
 
-  // Define the handleUpdate function
-  const handleUpdate = (index) => {
-    // Ensure there is a valid editedIndex before attempting an update
-    if (editedIndex !== null && editedIndex >= 0 && editedIndex < details.length) {
-      // Make a copy of the details array
-      const updatedDetails = [...details];
-      // Update the specific detail at the editedIndex
-      updatedDetails[editedIndex] = { ...details[editedIndex] };
-      // Call the onUpdate callback with the updated details
-      onUpdate(updatedDetails);
-      // Reset the editedIndex
-      setEditedIndex(null);
+
+      // Make sure to replace '/api/patients/my-patients' with your actual endpoint
+      const result = await axios.get('https://localhost:7042/api/Patients/my-patients', {
+        headers: {
+          Authorization: `Bearer ${token}`, // Assuming you are using JWT and passing the token in the Authorization header
+        },
+      });
+
+      // Update the state with the fetched patient data
+      setDetails(result.data);
+    } catch (error) {
+      console.error('Error fetching patients', error);
+    
     }
   };
 
-  // Define the handleDelete function
-  const handleDelete = (index) => {
-   // Ensure there is a valid index before attempting a delete
-   if (index >= 0 && index < details.length) {
-    // Make a copy of the details array
-    const updatedDetails = [...details];
-    // Remove the detail at the specified index
-    updatedDetails.splice(index, 1);
-    // Call the onDelete callback with the updated details
-    onDelete(updatedDetails);
-  }
-};
-
+  fetchPatients();
+}, []); 
+ 
   // Render the TablePage component
   return (
     <div className="TablePageContainer">
@@ -73,7 +61,7 @@ const TablePage = ({ onUpdate, onDelete }) => {
               <th>Last Name</th>
               <th>Age</th>
               <th>Gender</th>
-              <th>Contact</th>
+              {/* <th>Contact</th> */}
               <th>Address</th>
               <th>Predicted Disease</th>
               <th>Action</th>
@@ -86,12 +74,12 @@ const TablePage = ({ onUpdate, onDelete }) => {
                 <td>{detail.lastName}</td>
                 <td>{detail.age}</td>
                 <td>{detail.gender}</td>
-                <td>{detail.contact}</td>
+                {/* <td>{detail.contact}</td> */}
                 <td>{detail.address}</td>
-                <td>{detail.PredictedDisease}</td>
+                <td>{detail.predictedDisease}</td>
                 <td>
-                  <button onClick={() => handleUpdate()}>Update</button>
-                  <button onClick={() => handleDelete(index)}>Delete</button>
+                  <button ><Link to={`/PatientsUpdate/${detail.id}`} className='link'>Update</Link></button>
+                  <button /*onClick={() => handleDelete(index)}*/>Delete</button>
                 </td>
               </tr>
             ))}
