@@ -20,7 +20,7 @@ const Dashboard = () => {
     <div>
       <div  style={buttonContainerStyle}>
         <button style={buttonStyle} onClick={() => handlePageChange('table')}>My patient</button>
-        <button style={buttonStyle} ><Link to="/Dashboard/form" style={linkStyle}>Add Patient</Link></button>
+        <button style={buttonStyle} ><Link to="/form" style={linkStyle}>Add Patient</Link></button>
       </div>
 
       {activePage === 'form' && <FormPage addDetails={addDetails} />}

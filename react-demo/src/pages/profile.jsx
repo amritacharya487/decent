@@ -12,6 +12,7 @@ const UserProfile = () => {
   const [description, setDescription] = useState('');
   const [userId, setuserId]= useState('');
   const [error, setError] = useState('');
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     // Fetch user profile data from the backend
@@ -24,6 +25,7 @@ const UserProfile = () => {
           },
         });
         const userData = response.data;
+        setUserData(userData);
         setName(userData.name);
         setGender(userData.gender);
         setAddress(userData.address);
@@ -32,12 +34,12 @@ const UserProfile = () => {
         setuserId(userData.userId);
       } catch (error) {
         console.error('Error fetching profile data:', error);
-        setError('An error occurred while fetching profile data. Please try again later.');
+        setError('Please fill your details.');
       }
     };
 
     fetchProfileData();
-  }, []); // Empty dependency array ensures this effect runs only once on component mount
+  }, []); 
 
   return (
     <div className="container">
@@ -65,7 +67,12 @@ const UserProfile = () => {
         </label>
         {error && <p className="error">{error}</p>}
         {/*<button type="submit">Update Profile</button>*/}
-        <Link to='/Dashboard/update'  className='ac' >Update Profile</Link> 
+        {userData ? (
+        <Link to='/update' className='ac'>Update Profile</Link>
+        ) : (
+         <Link to='/update' className='ac'>Add Profile</Link>
+        )}
+          
       </form>
     </div>
   );

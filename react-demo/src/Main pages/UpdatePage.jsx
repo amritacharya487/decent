@@ -3,6 +3,8 @@ import './UpdatePage.css'; // Import CSS file for styling
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 
 const Form = () => {
   const { id } = useParams(); // Get the patient ID from URL parameters
@@ -59,9 +61,13 @@ const Form = () => {
       });
       if (response.status === 200) {
         console.log('Patient details updated successfully:', response.data);
+        toast.success('Patient updated successfully');
+
         navigate('/Dashboard');
       } else {
         console.error('Failed to update patient details');
+        toast.error('Error While Updating');
+
       }
       setFirstName('');
       setLastName('');
@@ -191,7 +197,7 @@ const Form = () => {
       <br/>
 
 
-        <button type="submit">Add Details</button>
+        <button type="submit">Update Details</button>
       </form>
     </div>
   );

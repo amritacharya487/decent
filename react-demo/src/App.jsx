@@ -15,6 +15,8 @@ import UserProfile from './pages/profile';
 import FormPage from './Main pages/FormPage';
 import Form from './Main pages/UpdatePage';
 import { Perdict } from './Main pages/Perdict';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -35,6 +37,7 @@ const App = () => {
     <div className="App">
       <>
         <Navbar isAuthenticated={isAuthenticated} handleLogout={handleLogout} />
+        <ToastContainer /> {/* Add ToastContainer here */}
         <Routes>
           <Route path="*" element={<Home />} />
           <Route path="/About" element={<About />} />
@@ -43,12 +46,12 @@ const App = () => {
           <Route path="/Login" element={<Login  />}/>
           <Route path="/Register" element={<Register />} />
           <Route path="/Dashboard" exact element={<Dashboard />} />
-          <Route path="/Dashboard/form" element={<FormPage />} />
+          <Route path="/form" element={<FormPage />} />
           {/*<Route path="/Dashboard/profile/:username" element={<UserProfile />} />*/}
-          <Route path= "/Dashboard/update" element={<ProfileForm/>}/>
-          <Route path= "/Dashboard/profile" element={<UserProfile/>}/>
+          <Route path= "/update" element={<ProfileForm/>}/>
+          <Route path= "/profile" element={<UserProfile/>}/>
           <Route path= "/PatientsUpdate/:id" element={<Form/>}/>
-          <Route path= "/Dashboard/Predict" element={<Perdict/>}/>
+          <Route path= "/Predict" element={<Perdict/>}/>
           
 
           

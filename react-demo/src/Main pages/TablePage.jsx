@@ -3,6 +3,7 @@ import React, { useState,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import "./TablePage.css";
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 // Define the TablePage component
@@ -48,6 +49,29 @@ useEffect(() => {
 
   fetchPatients();
 }, []); 
+
+
+const handleDelete = async (id) => {
+  const confirmDelete = window.confirm("Are you sure you want to delete this patient?");
+  if (!confirmDelete) {
+    return; // Cancel deletion if the user chooses not to proceed
+  }
+
+  try {
+    const token = localStorage.getItem('token');
+    await axios.delete(`https://localhost:7042/api/Patients/delete/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    // Remove the deleted patient from the state
+    setDetails(details.filter(patient => patient.id !== id));
+    toast.success('Patient deleted successfully.');
+  } catch (error) {
+    console.error('Error deleting patient', error);
+    alert('An error occurred while deleting the patient. Please try again later.');
+  }
+};
  
   // Render the TablePage component
   return (
@@ -68,7 +92,9 @@ useEffect(() => {
             </tr>
           </thead>
           <tbody>
-            {details.map((detail, index) => (
+          {details.length > 0 ? (
+            // Render table rows if there are details
+            details.map((detail, index) => (
               <tr key={index}>
                 <td>{detail.firstName}</td>
                 <td>{detail.lastName}</td>
@@ -79,10 +105,18 @@ useEffect(() => {
                 <td>{detail.predictedDisease}</td>
                 <td>
                   <button ><Link to={`/PatientsUpdate/${detail.id}`} className='link'>Update</Link></button>
-                  <button /*onClick={() => handleDelete(index)}*/>Delete</button>
+                  <button onClick={() => handleDelete(detail.id)}>Delete</button>
+                  
                 </td>
               </tr>
-            ))}
+               ))
+               ) : (
+                 // Render a message if there are no details
+                 <tr>
+                   <td colSpan="7">No Data Found!!!! Add Patients</td>
+                 </tr>
+               )}
+            
           </tbody>
         </table>
       </div>

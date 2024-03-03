@@ -29,21 +29,21 @@ const Login = ()=> {
     e.preventDefault();
 
     
-      // Make a POST request to the server to authenticate the user
-      const response = await axios.post('https://localhost:7042/api/Authentication/login', credentials);  
-
-      console.log('login success',response);
-      // Check if the response contains a token
-    if (response.data.token && response.data.userId) {
-      // Store the token and userId in local storage
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('userId', response.data.userId);
-
-      // Redirect to the Dashboard
-      navigate('/Dashboard');
-
-
-  }
+    try {
+      const response = await axios.post('https://localhost:7042/api/Authentication/login', credentials);
+  
+      if (response.data.token && response.data.userId) {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('userId', response.data.userId);
+        navigate('/Dashboard');
+      } else {
+        // If response doesn't contain token or userId, show error message
+        toast.error('Username or password incorrect');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      toast.error('Invalid username or password');
+    }
 };
       
 
@@ -63,7 +63,8 @@ const Login = ()=> {
           type="email"
           id="email"
           value={credentials.username}
-          placeholder='Enter Email' required
+          placeholder='Enter Email' 
+          required
           onChange={handleData}
         />
 

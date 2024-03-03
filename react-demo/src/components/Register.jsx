@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import './Register.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import signup from '../services/authservice';
-
+import { toast } from 'react-toastify';
 
     const RegisterForm = () => {
+
+      
+
       const [user, setUser] = useState({
           email: '',
           password: '',
@@ -13,6 +16,8 @@ import signup from '../services/authservice';
           
           
       });
+      const navigate= useNavigate();
+
       const [errors, setErrors] = useState({
         
         email: '',
@@ -55,7 +60,7 @@ import signup from '../services/authservice';
     }
 
     if (user.password !== user.confirmPassword) {
-        newErrors.confirmPassword = 'Passwords do not match';
+        toast.error ('Passwords do not match');
         isValid = false;
     } else {
         newErrors.confirmPassword = '';
@@ -75,7 +80,8 @@ const handleSignup = async (e) => {
   try {
     const response = await signup(user);
     console.log('Signup successful:', response);
-
+    toast.success("Check Your Email For Confirmation Link");
+    navigate('/login');
     // Handle success (e.g., redirect to login page)
   } catch (error) {
     console.error('Signup failed:', error);
@@ -95,7 +101,8 @@ const handleSignup = async (e) => {
           name='email'
           id="email"
           value={user.email}
-          placeholder=' Enter Email' required
+          placeholder='Enter Email'
+          required
           onChange={handleInputChange}
           
         />
@@ -106,7 +113,8 @@ const handleSignup = async (e) => {
           type="password"
           id="password"
           value={user.password}
-          placeholder='Enter Password' required
+          placeholder='Enter Password' 
+          required
           onChange={handleInputChange}
         />
       
@@ -116,7 +124,8 @@ const handleSignup = async (e) => {
           name='confirmPassword'
             type="password"
             value={user.confirmPassword}
-            placeholder='Confirm Password' required
+            placeholder='Confirm Password' 
+            required
             onChange={handleInputChange}
           />
 

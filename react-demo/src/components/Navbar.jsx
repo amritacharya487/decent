@@ -35,8 +35,8 @@ const Navbar = () => {
      <Link to="/Dashboard" className='title'>HealthWatch</Link>
      <ul>
      <li><NavLink to="/Dashboard">MyPatients</NavLink></li>
-     <li><NavLink to="/Dashboard/Predict">Predict</NavLink></li>
-     <li><NavLink to="/Dashboard/profile">Profile</NavLink></li>
+     <li><NavLink to="/Predict">Predict</NavLink></li>
+     <li><NavLink to="/profile">Profile</NavLink></li>
      <li><NavLink to ="/"onClick={removeAccount}>LogOut</NavLink></li>
       </ul>
       </>
@@ -44,9 +44,9 @@ const Navbar = () => {
       <>
         <Link to="/" className='title'>HealthWatch</Link>
         <ul>
-        <li><NavLink to="/About" spy={true} smooth={true} offset={50} duration={500} activeClassName="active-link">About</NavLink></li>
+        {/*<li><NavLink to="/About" spy={true} smooth={true} offset={50} duration={500} activeClassName="active-link">About</NavLink></li>
         <li><NavLink to="/Service" spy={true} smooth={true} offset={50} duration={500} activeClassName="active-link">Service</NavLink></li>
-        <li><NavLink to="/Contact" spy={true} smooth={true} offset={50} duration={500} activeClassName="active-link">Contact</NavLink></li>
+    <li><NavLink to="/Contact" spy={true} smooth={true} offset={50} duration={500} activeClassName="active-link">Contact</NavLink></li>*/}
         <li><NavLink to="/Login" activeClassName="active-link">SignIn</NavLink></li>
         <li><NavLink to="/Register" activeClassName="active-link">SignUp</NavLink></li>
         </ul>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './FormPage.css'; // Import CSS file for styling
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Form = () => {
   const [firstName, setFirstName] = useState('');
@@ -33,6 +34,8 @@ const Form = () => {
       });
         if (storeResponse.status === 200) {
           console.log('Patient details stored successfully:', storeResponse.data);
+          toast.success('Patient added successfully');
+
           navigate('/Dashboard');
           // Assuming you want to do something with the response, you can handle it here
         } else {
