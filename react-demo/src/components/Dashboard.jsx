@@ -12,6 +12,7 @@ const Dashboard = () => {
     setDetails([...details, detail]);
   };
 
+
   const handlePageChange = (page) => {
     setActivePage(page);
   };
@@ -58,7 +59,6 @@ const buttonStyle = {
   borderRadius: '5px',
   cursor: 'pointer',
   textDecoration: 'none',
-// Hover effect
    ':hover': {
     backgroundColor: '#0056b3',
   },
